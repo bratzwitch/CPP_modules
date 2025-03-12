@@ -1,11 +1,23 @@
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap(std::string name) : ClapTrap(name), hp(100),ep(100),a_dmg(30)
+FragTrap::FragTrap() : ClapTrap()
 {
+    this->name = "random fragtrap";
+    this->hp = 100;
+    this->ep = 100;
+    this->a_dmg = 30;
+    std::cout << "random fragtrap spawned!" << std::endl;
+}
+
+FragTrap::FragTrap(std::string name) : ClapTrap(name)
+{
+    this->hp = 100;
+    this->ep = 100;
+    this->a_dmg = 30;
     std::cout << "fragtrap spawned!\n" << std::endl;
 }
 
-FragTrap::FragTrap(const FragTrap &copy) : ClapTrap(copy), name(copy.name), hp(copy.hp), ep(copy.ep), a_dmg(copy.a_dmg)
+FragTrap::FragTrap(const FragTrap &copy) : ClapTrap(copy)
 {
     std::cout << "copy FragTrap spawned\n" << std::endl;
     *this = copy;

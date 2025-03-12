@@ -7,12 +7,8 @@
 
 class FragTrap : public ClapTrap
 {
-    private:
-        std::string name;
-        int hp;
-        int ep;
-        int a_dmg;
     public:
+        FragTrap();
         FragTrap(std::string name);
         FragTrap(const FragTrap &copy);
         ~FragTrap();

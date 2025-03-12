@@ -1,6 +1,11 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(std::string name) :name(name),hp(100),ep(100),a_dmg(30)
+ClapTrap::ClapTrap() : name("random claptrap"),hp(10),ep(10),a_dmg(0) 
+{
+    std::cout << "random claptrap spawned!" << std::endl;
+}
+
+ClapTrap::ClapTrap(std::string name) :name(name),hp(10),ep(10),a_dmg(0)
 {
     std::cout << "claptrap spawned!" << std::endl;
     
@@ -45,12 +50,12 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-    if(this->hp < 10 && this->hp > 0 && this->ep > 0)
+    if(this->hp < 100 && this->hp > 0 && this->ep > 0)
     {
         this->ep -= 1;
         std::cout << this->name << " hp before repair is " << this->hp << std::endl;
-        if((this->hp += amount) > 10)
-            this->hp = 10;
+        if((this->hp += amount) > 100)
+            this->hp = 100;
         std::cout << this->name << " hp after repair is " << this->hp << std::endl;
     }
     else if(this->ep <= 0)

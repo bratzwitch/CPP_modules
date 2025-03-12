@@ -1,6 +1,11 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(std::string name) :name(name),hp(10),ep(10),a_dmg(9)
+ClapTrap::ClapTrap() : name("random claptrap"),hp(10),ep(10),a_dmg(0) 
+{
+    std::cout << "random claptrap spawned!" << std::endl;
+}
+
+ClapTrap::ClapTrap(std::string name) :name(name),hp(10),ep(10),a_dmg(0)
 {
     std::cout << "claptrap spawned!" << std::endl;
 }

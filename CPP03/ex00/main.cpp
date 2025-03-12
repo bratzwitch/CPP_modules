@@ -2,8 +2,8 @@
 
 int main()
 {
-    std::string name = "bro";
-    ClapTrap ClapTrap(name);
+    // ClapTrap ClapTrap;
+    ClapTrap ClapTrap("bro");
     ClapTrap.attack(" air ");
     ClapTrap.attack(" air ");
     ClapTrap.attack(" air ");

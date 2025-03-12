@@ -1,11 +1,23 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name), hp(100),ep(50),a_dmg(20)
+ScavTrap::ScavTrap() : ClapTrap()
 {
+    this->name = "random scavtrap";
+    this->hp = 100;
+    this->ep = 50;
+    this->a_dmg = 20;
+    std::cout << "random scavtrap spawned!" << std::endl;
+}
+
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
+{
+    this->hp = 100;
+    this->ep = 50;
+    this->a_dmg = 20;
     std::cout << "ScavTrap spawned!\n" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &copy) : ClapTrap(copy), name(copy.name), hp(copy.hp), ep(copy.ep), a_dmg(copy.a_dmg)
+ScavTrap::ScavTrap(const ScavTrap &copy) : ClapTrap(copy)
 {
     std::cout << "copy ScavTrap spawned\n" << std::endl;
     *this = copy;
