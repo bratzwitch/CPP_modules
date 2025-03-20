@@ -4,7 +4,7 @@ CC = c++
 
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = main.cpp Bureucrat.cpp
+SRC = main.cpp Bureucrat.cpp Form.cpp
 
 OBJS = $(SRC:.cpp=.o)
 

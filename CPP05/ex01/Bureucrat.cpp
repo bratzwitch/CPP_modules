@@ -1,6 +1,5 @@
 #include "Bureaucrat.hpp"
 
-
 Bureaucrat::Bureaucrat() : name("bury"), grade(100)
 {
     if (grade < 1)
