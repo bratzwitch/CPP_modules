@@ -1,4 +1,6 @@
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
+
 
 Form::Form() : name("default"), is_signed(false), sign_grade(150), exec_grade(150) {}
 
@@ -57,7 +59,7 @@ void Bureaucrat::signForm(Form &form) {
         form.beSigned(*this);
         std::cout << name << " signed " << form << std::endl;
     } catch (const Form::GradeTooLowException& e) {
-        std::cout << name << " couldn’t sign " << form << " because " << e.what() << std::endl;
+        std::cout << name << " couldnt sign " << form << " because " << e.what() << std::endl;
     }
 }
 
