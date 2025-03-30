@@ -6,17 +6,16 @@
 #include <ctime>
 
 Base* generate() {
-    static bool seeded = false;
-    if (!seeded) {
-        srand(static_cast<unsigned int>(time(NULL)));
-        seeded = true;
-    }
-    int choice = rand() % 3;
-    if (choice == 0) {
-        return new A();
-    } else if (choice == 1) {
-        return new B();
-    } else {
-        return new C();
+    int i = std::rand() % 3;
+
+    switch (i) {
+        case 0:
+            return new A();
+        case 1:
+            return new B();
+        case 2:
+            return new C();
+        default:
+            return NULL;
     }
 }
