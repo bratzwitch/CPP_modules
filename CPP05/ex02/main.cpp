@@ -5,13 +5,13 @@
 
 int main() {
     try {
-        Bureaucrat b1("Alice", 5);
-        Bureaucrat b2("Bob", 50);
-        Bureaucrat b3("Charlie", 150);
+        Bureaucrat b1("bro", 5);
+        Bureaucrat b2("no bro", 50);
+        Bureaucrat b3("no bro frfrfr", 150);
         
-        ShrubberyCreationForm form1("Garden");
-        RobotomyRequestForm form2("Target 1");
-        PresidentialPardonForm form3("Target 2");
+        ShrubberyCreationForm form1("Bath");
+        RobotomyRequestForm form2("Lobotomy");
+        PresidentialPardonForm form3("Trashcan");
 
         std::cout << "Form 1: Shrubbery Creation Form\n";
         std::cout << form1 << std::endl;

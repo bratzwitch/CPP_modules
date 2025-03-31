@@ -1,5 +1,8 @@
-#include "identify.hpp"
+#include "Identify.hpp"
 #include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
 #include <iostream>
 
 void identify(Base* p) {
@@ -11,5 +14,28 @@ void identify(Base* p) {
 }
 
 void identify(Base& p) {
-    std::cout << p.getType() << std::endl;
+    try{
+        if(dynamic_cast<A*>(&p))
+        {
+            std::cout << "A" << std::endl; 
+            return;
+        }
+    }
+    catch(...) {}
+    try{
+        if(dynamic_cast<B*>(&p))
+        {
+            std::cout << "B" << std::endl; 
+            return;
+        }
+    }
+    catch(...) {}
+    try{
+        if(dynamic_cast<C*>(&p))
+        {
+            std::cout << "C" << std::endl; 
+            return;
+        }
+    }
+    catch(...){}
 }

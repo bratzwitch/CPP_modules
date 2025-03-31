@@ -4,16 +4,14 @@
 
 AForm::AForm() : name("default"), is_signed(false), sign_grade(150), exec_grade(150) {}
 
-AForm::AForm(const std::string& name, int sign_grade, int exec_grade) 
-    : name(name), is_signed(false), sign_grade(sign_grade), exec_grade(exec_grade) {
+AForm::AForm(const std::string& name, int sign_grade, int exec_grade) : name(name), is_signed(false), sign_grade(sign_grade), exec_grade(exec_grade) {
     if (sign_grade < 1 || exec_grade < 1)
         throw GradeTooHighException();
     if (sign_grade > 150 || exec_grade > 150)
         throw GradeTooLowException();
 }
 
-AForm::AForm(const AForm& other) 
-    : name(other.name), is_signed(other.is_signed), sign_grade(other.sign_grade), exec_grade(other.exec_grade) {}
+AForm::AForm(const AForm& other) : name(other.name), is_signed(other.is_signed), sign_grade(other.sign_grade), exec_grade(other.exec_grade) {}
 
 AForm& AForm::operator=(const AForm& other) {
     if (this != &other) {
@@ -64,10 +62,9 @@ void Bureaucrat::signForm(AForm &AForm) {
 }
 
 std::ostream& operator<<(std::ostream& os, const AForm& f) {
-    os << "AForm " << f.getName() 
-       << " (Sign grade: " << f.getSignGrade() 
-       << ", Exec grade: " << f.getExecGrade() 
-       << ", Signed: " << (f.getIsSigned() ? "Yes" : "No") 
-       << ")";
+    os << "form " << f.getName() 
+       << " sign grade: " << f.getSignGrade() 
+       << ", exec grade: " << f.getExecGrade() 
+       << ", signed: " << (f.getIsSigned() ? "yes" : "no");
     return os;
 }

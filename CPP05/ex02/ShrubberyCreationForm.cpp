@@ -2,8 +2,22 @@
 #include <iostream>
 #include <fstream>
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) 
-    : AForm("Shrubbery Creation", 145, 137), target(target) {}
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) : AForm("Shrubbery Creation", 145, 137), target(target) {}
+
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("Robotomy Request", 25, 5), target("random") {}
+
+ShrubberyCreationForm::~ShrubberyCreationForm() {}
+
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& copy)
+    : AForm(copy), target(copy.target) {}
+
+ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& copy) {
+    if (this != &copy) {
+        AForm::operator=(copy);
+        target = copy.target;
+    }
+    return *this;
+}
 
 void ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
     if (!getIsSigned()) {

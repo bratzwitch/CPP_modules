@@ -11,8 +11,9 @@ class AForm;
 class Intern {
     public:
         Intern();
+        Intern(const Intern &copy);
         ~Intern();
-        Intern& operator=(const Intern& other);
+        Intern& operator=(const Intern& copy);
         AForm* makeForm(const std::string& formName, const std::string& target);
 };
 

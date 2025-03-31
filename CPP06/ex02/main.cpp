@@ -1,5 +1,5 @@
-#include "gen.hpp"
-#include "identify.hpp"
+#include "Gen.hpp"
+#include "Identify.hpp"
 #include "Base.hpp"
 #include "A.hpp"
 #include "B.hpp"

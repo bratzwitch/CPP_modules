@@ -64,10 +64,9 @@ void Bureaucrat::signForm(AForm &AForm) {
 }
 
 std::ostream& operator<<(std::ostream& os, const AForm& f) {
-    os << "AForm " << f.getName() 
-       << " (Sign grade: " << f.getSignGrade() 
-       << ", Exec grade: " << f.getExecGrade() 
-       << ", Signed: " << (f.getIsSigned() ? "Yes" : "No") 
-       << ")";
+    os << "form " << f.getName() 
+       << " sign grade: " << f.getSignGrade() 
+       << ", exec grade: " << f.getExecGrade() 
+       << ", signed: " << (f.getIsSigned() ? "yes" : "no");
     return os;
 }

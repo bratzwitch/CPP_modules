@@ -44,14 +44,9 @@ void ScalarConverter::convert(const std::string& num) {
         return;
     } catch (...) {}
 
-    if (num.length() == 3 && num[0] == '\'' && num[2] == '\'') {
-        char c = num[1];
-        printResults(c, static_cast<int>(c), static_cast<float>(c), static_cast<double>(c));
-        return;
-    }
     try {
         char* end;
-        long temp = strtol(num.c_str(), &end, 10);
+        long temp = strtol(num.c_str(), &end, 1);
         if (*end == '\0' && temp >= INT_MIN && temp <= INT_MAX) {
             int i = static_cast<int>(temp);
             printResults(static_cast<char>(i), i, static_cast<float>(i), static_cast<double>(i));

@@ -7,6 +7,15 @@ Intern::Intern() {
 Intern::~Intern() {
 }
 
+Intern::Intern(const Intern& copy) {
+    (void)copy;
+}
+
+Intern& Intern::operator=(const Intern& copy) {
+    (void)copy;
+    return *this;
+}
+
 AForm* Intern::makeForm(const std::string& formName, const std::string& target) {
     AForm* form = NULL;
 

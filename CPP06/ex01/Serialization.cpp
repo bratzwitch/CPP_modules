@@ -10,11 +10,11 @@ Serialization& Serialization::operator=(const Serialization& ) {
 
 Serialization::~Serialization() {}
 
-size_t Serialization::serialize(Data* ptr) {
-    return reinterpret_cast<size_t>(ptr);
+uintptr_t Serialization::serialize(Data* ptr) {
+    return reinterpret_cast<uintptr_t>(ptr);
 }
 
-Data* Serialization::deserialize(size_t raw) {
+Data* Serialization::deserialize(uintptr_t raw) {
     return reinterpret_cast<Data*>(raw);
 }
 

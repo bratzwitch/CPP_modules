@@ -6,10 +6,10 @@
 #include <ctime>
 
 Base* generate() {
-    static bool seeded = false;
-    if (!seeded) {
+    static bool trigger = false;
+    if (!trigger) {
         srand(static_cast<unsigned int>(time(NULL)));
-        seeded = true;
+        trigger = true;
     }
     int choice = rand() % 3;
     if (choice == 0) {
