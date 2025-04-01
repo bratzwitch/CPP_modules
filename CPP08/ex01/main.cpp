@@ -2,7 +2,7 @@
 
 int main()
 {
-    Span span = Span(5);
+    Span span = Span(100000);
     span.addNumber(1);
     span.addNumber(15);
     span.addNumber(50);
@@ -11,6 +11,13 @@ int main()
     std::cout << span[1] << std::endl;
     std::cout << span[2] << std::endl;
     std::cout << span[3] << std::endl;
-    std::cout << span[4] << std::endl;
+    std::cout << span.shortestSpan() << std::endl;
+    std::cout << span.longestSpan() << std::endl;
+    span.fillNum(10000);
+    std::cout << span.shortestSpan() << std::endl;
+    std::cout << span.longestSpan() << std::endl;
+    span.fillNum(80000);
+    std::cout << span.shortestSpan() << std::endl;
+    std::cout << span.longestSpan() << std::endl;
     return 0;
 }

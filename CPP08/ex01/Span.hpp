@@ -3,6 +3,8 @@
 
 #include <queue>
 #include <iostream>
+#include <cstdlib>
+#include <algorithm>
 
 class Span
 {
@@ -18,7 +20,7 @@ class Span
         ~Span();
     void addNumber(int num);
     int operator[](size_t index) const;
-    void fillNum(int start, int end);
+    void fillNum(unsigned int amount);
     int shortestSpan();
     int longestSpan();
 };
