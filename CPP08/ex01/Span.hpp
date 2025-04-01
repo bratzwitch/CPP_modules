@@ -1,11 +1,15 @@
 #ifndef SPAN_HPP
 #define SPAN_HPP
 
+#include <queue>
+#include <iostream>
+
 class Span
 {
     private:
-        int *arr;
+        std::vector<int> arr;
         unsigned int N;
+        std::deque<int> myqueue;
     public:
         Span();
         Span(unsigned int N);
@@ -13,6 +17,7 @@ class Span
         Span& operator=(const Span& copy);
         ~Span();
     void addNumber(int num);
+    int operator[](size_t index) const;
     void fillNum(int start, int end);
     int shortestSpan();
     int longestSpan();
