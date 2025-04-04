@@ -5,12 +5,12 @@
 #include <algorithm>
 
 
-template <typename T, int N> 
-int easyfind(T(&arr)[N], int i)
+template <typename T> 
+int easyfind(T t, int i)
 {
-    T* it = std::find(arr, arr + N, i);
-    if (it != arr + N)
-        return std::distance(arr, it);
+    typename T::iterator it = std::find(t.begin(), t.end(), i);
+    if (it != t.end())
+        return std::distance(t.begin(), it);
     return -1;
 }
 

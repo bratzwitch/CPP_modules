@@ -46,29 +46,19 @@ int Span::shortestSpan() {
     }
     std::vector<int> sorted = arr;
     std::sort(sorted.begin(), sorted.end());
-    int min = sorted[1] - sorted[0];
-    for (unsigned int i = 1; i < sorted.size() - 1; i++)
-    {
-        int diff = sorted[i + 1] - sorted[i];
-        if (diff < min)
-            min = diff;
-    }
-    return min;
+    int diff = sorted[1] - sorted[0];
+    for (unsigned int i = 1; i < sorted.size() - 1; ++i)
+        diff = std::min(diff, sorted[i + 1] - sorted[i]);
+    return diff;
 }
 
 int Span::longestSpan() {
     if (arr.size() < 2) {
         throw std::invalid_argument("no span found, need at least 2 numbers");
     }
-    int min = arr[0];
-    int max = arr[0];
-    for (unsigned int i = 1; i < arr.size(); i++) {
-        if (arr[i] < min)
-            min = arr[i];
-        if (arr[i] > max)
-            max = arr[i];
-    }
-    return max - min;
+    std::vector<int>::iterator min_it = std::min_element(arr.begin(), arr.end());
+    std::vector<int>::iterator max_it = std::max_element(arr.begin(), arr.end());
+    return *max_it - *min_it;
 }
 
 int Span::operator[](size_t index) const {

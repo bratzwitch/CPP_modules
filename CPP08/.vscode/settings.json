@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "array": "c",
+        "deque": "c",
+        "string": "c",
+        "vector": "c",
+        "string_view": "c",
+        "span": "c",
+        "unordered_map": "c",
+        "initializer_list": "c",
+        "iostream": "cpp"
+    }
+}
