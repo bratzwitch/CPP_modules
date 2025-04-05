@@ -52,11 +52,12 @@ int main(int argc, char* argv[]) {
         std::cout << "Error: could not open file." << std::endl;
         return 1;
     }
-    std::string file = argv[1];
+    std::string inputFile = argv[1];
+    std::string databaseFile = "data.csv";
     try {
         BitcoinExchange btc;
-        btc.loadDatabase(file);
-        processInput(file, btc);
+        btc.loadDatabase(databaseFile);
+        processInput(inputFile, btc);
     } catch (const std::exception& e) {
         std::cout << e.what() << std::endl;
         return 1;
