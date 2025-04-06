@@ -27,13 +27,17 @@ void BitcoinExchange::loadDatabase(const std::string& filename) {
 }
 
 float BitcoinExchange::getExchangeRate(const std::string& date) const {
-    std::map<std::string, float>::const_iterator it = exchangeRates.find(date);
-    if (it != exchangeRates.end())
-        return it->second;
-
-    it = exchangeRates.lower_bound(date);
-    if (it == exchangeRates.begin())
+    if (exchangeRates.empty()) {
         return 0;
+    }
+    std::map<std::string, float>::const_iterator it = exchangeRates.find(date);
+    if (it != exchangeRates.end()) {
+        return it->second;
+    }
+    it = exchangeRates.lower_bound(date);
+    if (it == exchangeRates.begin()) {
+        return 0;
+    }
     --it;
     return it->second;
 }
@@ -51,13 +55,16 @@ bool BitcoinExchange::isValidDate(const std::string& date) const {
 
     char* endptr;
     std::strtol(yearStr.c_str(), &endptr, 10);
-    if (*endptr != '\0' || endptr == yearStr.c_str()) return false;
+    if (*endptr != '\0' || endptr == yearStr.c_str()) 
+        return false;
     
     long month = std::strtol(monthStr.c_str(), &endptr, 10);
-    if (*endptr != '\0' || endptr == monthStr.c_str()) return false;
+    if (*endptr != '\0' || endptr == monthStr.c_str())
+        return false;
     
     long day = std::strtol(dayStr.c_str(), &endptr, 10);
-    if (*endptr != '\0' || endptr == dayStr.c_str()) return false;
+    if (*endptr != '\0' || endptr == dayStr.c_str())
+        return false;
     
     if (month < 1 || month > 12 || day < 1 || day > 31)
         return false;

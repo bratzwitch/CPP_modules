@@ -11,7 +11,14 @@ void processInput(const std::string& filename, const BitcoinExchange& btc) {
     }
 
     std::string line;
+    bool isFirstLine = true;
     while (std::getline(file, line)) {
+        if (isFirstLine) {
+            isFirstLine = false;
+            if (line == "date | value") {
+                continue;
+            }
+        }
         std::stringstream ss(line);
         std::string date, separator, valueStr;
         if (!std::getline(ss, date, ' ') || 
