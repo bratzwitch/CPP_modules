@@ -54,7 +54,6 @@ int main(int argc, char* argv[]) {
         }
         std::cout << std::endl;
 
-        // Display timing for both containers
         std::cout << "Time to process a range of " << vecResult.size() << " elements with std::vector : " << vecTime << " us" << std::endl;
         std::cout << "Time to process a range of " << deqResult.size() << " elements with std::deque : " << deqTime << " us" << std::endl;
     } catch (const std::exception&) {

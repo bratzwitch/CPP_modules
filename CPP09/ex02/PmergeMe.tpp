@@ -80,7 +80,7 @@ void PmergeMe<Container>::insert(Container &main, Container &pend, ValueType odd
 template <typename Container>
 void PmergeMe<Container>::sort(Container &vec) {
     static int order = 1;
-
+    steps = 0;
     int unit_size = vec.size() / order;
     if (unit_size < 2)
         return;
@@ -93,11 +93,12 @@ void PmergeMe<Container>::sort(Container &vec) {
         if (*(it + (order - 1)) > *(it + ((order * 2) - 1))) {
             for (int i = 0; i < order; i++) {
                 std::swap(*(it + i), *(it + i + order));
+                steps += 1;
             }
         }
     }
 
-    order *= 2
+    order *= 2;
     sort(vec);
     order /= 2;
 

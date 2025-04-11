@@ -3,7 +3,7 @@
 #include <fstream>
 #include <sstream>
 
-void processInput(const std::string& filename, const BitcoinExchange& btc) {
+void processInput(const std::string& filename, BitcoinExchange& btc) {
     std::ifstream file(filename.c_str());
     if (!file.is_open()) {
         std::cout << "Error: could not open file." << std::endl;
@@ -11,17 +11,26 @@ void processInput(const std::string& filename, const BitcoinExchange& btc) {
     }
 
     std::string line;
-    bool isFirstLine = true;
+    bool firstline = true;
     while (std::getline(file, line)) {
-        if (isFirstLine) {
-            isFirstLine = false;
-            if (line == "date | value") {
+        
+        if(firstline)
+        {
+            if(line == "date | value")
+            {
+                firstline = false;
                 continue;
+            }
+            else
+            {
+                std::cout << "wrong header line" << std::endl;
+                return;
             }
         }
         std::stringstream ss(line);
+        
         std::string date, separator, valueStr;
-        if (!std::getline(ss, date, ' ') || 
+        if (!(std::getline(ss, date, ' ')) || 
             !std::getline(ss, separator, ' ') || 
             !std::getline(ss, valueStr) || 
             separator != "|") {
@@ -59,15 +68,16 @@ int main(int argc, char* argv[]) {
         std::cout << "Error: could not open file." << std::endl;
         return 1;
     }
-    std::string inputFile = argv[1];
-    std::string databaseFile = "data.csv";
+    std::string filename = argv[1];
+    std::string outputFilename =  filename;
     try {
         BitcoinExchange btc;
-        btc.loadDatabase(databaseFile);
-        processInput(inputFile, btc);
+        btc.loadDatabase(outputFilename);
+        processInput(argv[1], btc);
     } catch (const std::exception& e) {
         std::cout << e.what() << std::endl;
         return 1;
     }
+
     return 0;
 }

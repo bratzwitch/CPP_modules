@@ -16,6 +16,7 @@ template <typename Container>
 class PmergeMe {
     private:
         int Jacobsthal(int num);
+        int steps;
     public:
         PmergeMe();
         ~PmergeMe();

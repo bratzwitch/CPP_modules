@@ -42,7 +42,7 @@ float BitcoinExchange::getExchangeRate(const std::string& date) const {
     return it->second;
 }
 
-bool BitcoinExchange::isValidDate(const std::string& date) const {
+bool BitcoinExchange::isValidDate(std::string& date){
     if (date.length() != 10 || date[4] != '-' || date[7] != '-')
         return false;
     
@@ -54,7 +54,7 @@ bool BitcoinExchange::isValidDate(const std::string& date) const {
         return false;
 
     char* endptr;
-    std::strtol(yearStr.c_str(), &endptr, 10);
+    long year = std::strtol(yearStr.c_str(), &endptr, 10);
     if (*endptr != '\0' || endptr == yearStr.c_str()) 
         return false;
     
@@ -65,7 +65,8 @@ bool BitcoinExchange::isValidDate(const std::string& date) const {
     long day = std::strtol(dayStr.c_str(), &endptr, 10);
     if (*endptr != '\0' || endptr == dayStr.c_str())
         return false;
-    
+    if((year == 2009 && day < 02) || year < 2009)
+        date = "2009-01-02";
     if (month < 1 || month > 12 || day < 1 || day > 31)
         return false;
     return true;
