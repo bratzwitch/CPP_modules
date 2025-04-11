@@ -20,9 +20,12 @@ bool RPN::isOperator(char c) const {
 
 int RPN::performOperation(int a, int b, char op) const {
     switch (op) {
-        case '+': return a + b;
-        case '-': return a - b;
-        case '*': return a * b;
+        case '+':
+            return a + b;
+        case '-': 
+            return a - b;
+        case '*': 
+            return a * b;
         case '/':
             if (b == 0) {
                 throw std::runtime_error("division by zero");
@@ -38,12 +41,15 @@ int RPN::calculate(const std::string& expression) {
     std::string token;
 
     while (ss >> token) {
-        if (token.length() == 1 && isOperator(token[0])) {
+        if (token.length() == 1 && isOperator(token[0]))
+        {
             if (stack.size() < 2) {
                 throw std::runtime_error("Invalid expression: too few operands");
             }
-            int b = stack.top(); stack.pop();
-            int a = stack.top(); stack.pop();
+            int b = stack.top();
+            stack.pop();
+            int a = stack.top();
+            stack.pop();
             int result = performOperation(a, b, token[0]);
             stack.push(result);
         } else if (token.length() == 1 && token[0] >= '0' && token[0] <= '9') {

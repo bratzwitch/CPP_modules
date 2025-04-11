@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
         int result = rpn.calculate(argv[1]);
         std::cout << result << std::endl;
     } catch (const std::exception& e) {
-        std::cerr << "error" << std::endl;  // Simplified error message as per example
+        std::cerr << "error" << std::endl;
         return 1;
     }
 
