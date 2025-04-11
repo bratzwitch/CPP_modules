@@ -9,20 +9,16 @@ void processInput(const std::string& filename, BitcoinExchange& btc) {
         std::cout << "Error: could not open file." << std::endl;
         return;
     }
-
     std::string line;
     bool firstline = true;
     while (std::getline(file, line)) {
         
-        if(firstline)
-        {
-            if(line == "date | value")
-            {
+        if(firstline){
+            if(line == "date | value"){
                 firstline = false;
                 continue;
             }
-            else
-            {
+            else{
                 std::cout << "wrong header line" << std::endl;
                 return;
             }
@@ -63,13 +59,31 @@ void processInput(const std::string& filename, BitcoinExchange& btc) {
     }
 }
 
+std::string findCsvFile() {
+    DIR* dir = opendir(".");
+    if (!dir) {
+        return "";
+    }
+    struct dirent* entry;
+    while ((entry = readdir(dir))) {
+        std::string filename = entry->d_name;
+        if (filename.length() >= 4 && 
+            filename.substr(filename.length() - 4) == ".csv") {
+            closedir(dir);
+            return filename;
+        }
+    }
+    closedir(dir);
+    return "";
+}
+
 int main(int argc, char* argv[]) {
     if (argc != 2) {
         std::cout << "Error: could not open file." << std::endl;
         return 1;
     }
     std::string filename = argv[1];
-    std::string outputFilename =  filename;
+    std::string outputFilename = findCsvFile();
     try {
         BitcoinExchange btc;
         btc.loadDatabase(outputFilename);

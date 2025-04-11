@@ -54,7 +54,7 @@ bool BitcoinExchange::isValidDate(std::string& date){
         return false;
 
     char* endptr;
-    long year = std::strtol(yearStr.c_str(), &endptr, 10);
+    std::strtol(yearStr.c_str(), &endptr, 10);
     if (*endptr != '\0' || endptr == yearStr.c_str()) 
         return false;
     
@@ -65,8 +65,6 @@ bool BitcoinExchange::isValidDate(std::string& date){
     long day = std::strtol(dayStr.c_str(), &endptr, 10);
     if (*endptr != '\0' || endptr == dayStr.c_str())
         return false;
-    if((year == 2009 && day < 02) || year < 2009)
-        date = "2009-01-02";
     if (month < 1 || month > 12 || day < 1 || day > 31)
         return false;
     return true;

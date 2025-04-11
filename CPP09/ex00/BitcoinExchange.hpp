@@ -7,6 +7,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <cstdlib>
+#include <dirent.h>
 
 class BitcoinExchange {
     private:
