@@ -2,7 +2,7 @@
 
 
 template <typename Container>
-void processInput(const std::string& input, Container& result, double& time)
+void processInput(const std::string& input, Container& result, double& time, int& res_steps)
 {
     Container vec;
     std::stringstream ss(input);
@@ -15,13 +15,15 @@ void processInput(const std::string& input, Container& result, double& time)
         }
         vec.push_back(static_cast<typename Container::value_type>(num));
     }
-
+    
     PmergeMe<Container> sorter;
+    int steps = 0;
     clock_t start = clock();
-    sorter.sort(vec);
+    sorter.sort(vec,steps);
     clock_t end = clock();
     time = static_cast<double>(end - start) * 1e6 / CLOCKS_PER_SEC;
     result = vec;
+    res_steps = steps;
 }
 
 int main(int argc, char* argv[]) {
@@ -43,9 +45,10 @@ int main(int argc, char* argv[]) {
         std::vector<int> vecResult;
         std::deque<int> deqResult;
         double vecTime = 0.0, deqTime = 0.0;
-
-        processInput(input, vecResult, vecTime);
-        processInput(input, deqResult, deqTime);
+        int vecSteps = 0;
+        int deqSteps = 0;
+        processInput(input, vecResult, vecTime,vecSteps);
+        processInput(input, deqResult, deqTime,deqSteps);
 
         std::cout << "After: ";
         for (size_t i = 0; i < vecResult.size(); ++i) {
@@ -54,10 +57,12 @@ int main(int argc, char* argv[]) {
         }
         std::cout << std::endl;
 
-        std::cout << "Time to process a range of " << vecResult.size() << " elements with std::vector : " << vecTime << " us" << std::endl;
-        std::cout << "Time to process a range of " << deqResult.size() << " elements with std::deque : " << deqTime << " us" << std::endl;
+        std::cout << "time to process a range of " << vecResult.size() << " elements with std::vector : " << vecTime << " us" << std::endl;
+        std::cout << "steps used with std::vector: " << vecSteps << std::endl;
+        std::cout << "time to process a range of " << deqResult.size() << " elements with std::deque : " << deqTime << " us" << std::endl;
+        std::cout << "steps used with std::deque: " << deqSteps << std::endl;
     } catch (const std::exception&) {
-        std::cerr << "Error" << std::endl;
+        std::cerr << "error" << std::endl;
         return 1;
     }
 

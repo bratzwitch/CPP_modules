@@ -36,7 +36,7 @@ float BitcoinExchange::getExchangeRate(const std::string& date) const {
     }
     it = exchangeRates.lower_bound(date);
     if (it == exchangeRates.begin()) {
-        return 0;
+        return -1;
     }
     --it;
     return it->second;

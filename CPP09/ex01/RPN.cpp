@@ -44,7 +44,7 @@ int RPN::calculate(const std::string& expression) {
         if (token.length() == 1 && isOperator(token[0]))
         {
             if (stack.size() < 2) {
-                throw std::runtime_error("Invalid expression: too few operands");
+                throw std::runtime_error("invalid calculation");
             }
             int b = stack.top();
             stack.pop();
@@ -55,12 +55,12 @@ int RPN::calculate(const std::string& expression) {
         } else if (token.length() == 1 && token[0] >= '0' && token[0] <= '9') {
             stack.push(token[0] - '0');
         } else {
-            throw std::runtime_error("Invalid token in expression");
+            throw std::runtime_error("invalid calculation");
         }
     }
 
     if (stack.size() != 1) {
-        throw std::runtime_error("Invalid expression: too many operands");
+        throw std::runtime_error("invalid calculation");
     }
 
     return stack.top();

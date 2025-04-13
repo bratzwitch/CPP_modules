@@ -55,6 +55,11 @@ void processInput(const std::string& filename, BitcoinExchange& btc) {
         }
 
         float rate = btc.getExchangeRate(date);
+        if(rate == -1)
+        {
+            std::cout << "no valid exchange rate available for " << date << std::endl;
+            continue;
+        }
         std::cout << date << " => " << value << " = " << (value * rate) << std::endl;
     }
 }
@@ -82,7 +87,7 @@ int main(int argc, char* argv[]) {
         std::cout << "Error: could not open file." << std::endl;
         return 1;
     }
-    std::string filename = argv[1];
+    std::string file = argv[1];
     std::string outputFilename = findCsvFile();
     try {
         BitcoinExchange btc;
