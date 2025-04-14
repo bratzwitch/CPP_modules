@@ -25,11 +25,11 @@ PmergeMe<Container>& PmergeMe<Container>::operator=(const PmergeMe& other) {
 template <typename Container>
 int PmergeMe<Container>::Jacobsthal(int k) {
     // formula: J(k) = (2^(k+1) + (-1)^k) / 3.
-    return static_cast<int>((pow(2, k + 1) + pow(-1, k)) / 3 + 0.5);
+    return round((pow(2, k + 1) + pow(-1, k)) / 3);
 }
 
 template <typename Container>
-void PmergeMe<Container>::insert(Container& main_chain, Container& pending, ValueType odd_one, Container& leftovers, Container& numbers, bool has_odd, int group_size, int& steps) {
+void PmergeMe<Container>::insert(Container& main_chain, Container& pending, ValueType odd_one, Container& leftovers, Container& numbers, bool has_odd, int group_size) {
     // Time to weave pending numbers into the main chain like a sorting wizard!
     Iterator spot;
 
@@ -37,7 +37,6 @@ void PmergeMe<Container>::insert(Container& main_chain, Container& pending, Valu
         // Solo dancer? Find your spot with a binary search!
         spot = std::upper_bound(main_chain.begin(), main_chain.end(), *pending.begin());
         main_chain.insert(spot, *pending.begin());
-        steps++; // One step for the grand entrance!
     } else if (pending.size() > 1) {
         // Group dance! Use Jacobsthal numbers to pick the order.
         size_t jacob_level = 3; // Start at Jacobsthal level 3 for flair.
@@ -66,7 +65,6 @@ void PmergeMe<Container>::insert(Container& main_chain, Container& pending, Valu
                 spot = std::upper_bound(main_chain.begin(), spot, *(pending.begin() + batch_size - 1));
                 main_chain.insert(spot, *(pending.begin() + batch_size - 1));
                 pending.erase(pending.begin() + batch_size - 1);
-                steps++; // Step counted for the move!
 
                 batch_size--;
                 shift++;
@@ -83,7 +81,6 @@ void PmergeMe<Container>::insert(Container& main_chain, Container& pending, Valu
     if (has_odd) {
         spot = std::upper_bound(main_chain.begin(), main_chain.end(), odd_one);
         main_chain.insert(spot, odd_one);
-        steps++; // One step for the oddball!
     }
 
     // Reconstruct the sorted sequence with a spring in our step.
@@ -91,7 +88,6 @@ void PmergeMe<Container>::insert(Container& main_chain, Container& pending, Valu
         Iterator match = std::find(numbers.begin(), numbers.end(), *i);
         // Grab the whole group this number represents.
         sorted_lineup.insert(sorted_lineup.end(), match - (group_size - 1), match + 1);
-        steps++; // Step for each group we place!
     }
     // Don't forget the leftovers from the party!
     sorted_lineup.insert(sorted_lineup.end(), leftovers.begin(), leftovers.end());
@@ -118,10 +114,10 @@ void PmergeMe<Container>::sort(Container& numbers, int& steps) {
         if (*(it + (group_size - 1)) > *(it + ((group_size * 2) - 1))) {
             for (int i = 0; i < group_size; ++i) {
                 std::swap(*(it + i), *(it + i + group_size));
-                steps++; // Step for each swap!
+                steps++;
             }
-            steps++; // Extra step for the comparison!
         }
+
     }
 
     // Double the group size and keep sorting recursively!
@@ -156,7 +152,7 @@ void PmergeMe<Container>::sort(Container& numbers, int& steps) {
 
     // Time to merge everyone into the sorted lineup!
     if (has_odd || !pending.empty()) {
-        insert(main_chain, pending, odd_one, leftovers, numbers, has_odd, group_size, steps);
+        insert(main_chain, pending, odd_one, leftovers, numbers, has_odd, group_size);
     }
 }
 

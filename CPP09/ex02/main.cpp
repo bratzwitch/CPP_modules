@@ -21,7 +21,7 @@ void processInput(const std::string& input, Container& result, double& time, int
     clock_t start = clock();
     sorter.sort(vec,steps);
     clock_t end = clock();
-    time = static_cast<double>(end - start) * 1e6 / CLOCKS_PER_SEC;
+    time = static_cast<double>(end - start) * 100 / CLOCKS_PER_SEC;
     result = vec;
     res_steps = steps;
 }
@@ -56,11 +56,10 @@ int main(int argc, char* argv[]) {
             if (i < vecResult.size() - 1) std::cout << " ";
         }
         std::cout << std::endl;
-
-        std::cout << "time to process a range of " << vecResult.size() << " elements with std::vector : " << vecTime << " us" << std::endl;
-        std::cout << "steps used with std::vector: " << vecSteps << std::endl;
-        std::cout << "time to process a range of " << deqResult.size() << " elements with std::deque : " << deqTime << " us" << std::endl;
-        std::cout << "steps used with std::deque: " << deqSteps << std::endl;
+        std::cout << "time to process a range of " << vecResult.size() << " elements with std::vector : " << vecTime << " ms" << std::endl;
+        std::cout << "comparison steps used with std::vector: " << vecSteps << std::endl;
+        std::cout << "time to process a range of " << deqResult.size() << " elements with std::deque : " << deqTime << " ms" << std::endl;
+        std::cout << "comparison steps used with std::deque: " << deqSteps << std::endl;
     } catch (const std::exception&) {
         std::cerr << "error" << std::endl;
         return 1;

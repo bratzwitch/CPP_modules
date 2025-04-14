@@ -26,7 +26,7 @@ class PmergeMe {
     typedef typename Container::iterator Iterator;
     void sort(Container& vec, int& steps);
     void process(const std::string& input, Container& result, double& time);
-    void insert(Container& main, Container& pend, ValueType odd, Container& left, Container& vec, bool is_odd, int order, int& steps);
+    void insert(Container& main, Container& pend, ValueType odd, Container& left, Container& vec, bool is_odd, int order);
 };
 
 #include "PmergeMe.tpp"
