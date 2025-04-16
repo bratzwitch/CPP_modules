@@ -12,13 +12,13 @@ template <typename Container>
 PmergeMe<Container>::~PmergeMe() {}
 
 template <typename Container>
-PmergeMe<Container>::PmergeMe(const PmergeMe& other) {
-    (void)other;
+PmergeMe<Container>::PmergeMe(const PmergeMe& copy) {
+    (void)copy;
 }
 
 template <typename Container>
-PmergeMe<Container>& PmergeMe<Container>::operator=(const PmergeMe& other) {
-    (void)other;
+PmergeMe<Container>& PmergeMe<Container>::operator=(const PmergeMe& copy) {
+    (void)copy;
     return *this;
 }
 
@@ -113,11 +113,10 @@ void PmergeMe<Container>::sort(Container& numbers, int& steps) {
     for (Iterator it = start; it < end; it += (group_size * 2)) {
         if (*(it + (group_size - 1)) > *(it + ((group_size * 2) - 1))) {
             for (int i = 0; i < group_size; ++i) {
-                std::swap(*(it + i), *(it + i + group_size));
-                steps++;
+                std::swap(*(it + i), *(it + i + group_size));  
             }
         }
-
+        steps++;
     }
 
     // Double the group size and keep sorting recursively!

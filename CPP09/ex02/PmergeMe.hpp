@@ -19,8 +19,8 @@ class PmergeMe {
     public:
         PmergeMe();
         ~PmergeMe();
-        PmergeMe(const PmergeMe& other);
-        PmergeMe& operator=(const PmergeMe& other);
+        PmergeMe(const PmergeMe& copy);
+        PmergeMe& operator=(const PmergeMe& copy);
 
     typedef typename Container::value_type ValueType;
     typedef typename Container::iterator Iterator;
