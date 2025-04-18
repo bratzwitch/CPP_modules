@@ -15,6 +15,8 @@ class BitcoinExchange {
     
     public:
         BitcoinExchange();
+        ~BitcoinExchange();
+        BitcoinExchange(const BitcoinExchange &copy)
         void loadDatabase(const std::string& file);
         float getExchangeRate(const std::string& date) const;
         bool isValidDate(std::string& date);

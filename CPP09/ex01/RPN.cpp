@@ -5,11 +5,11 @@ RPN::RPN() {}
 
 RPN::~RPN() {}
 
-RPN::RPN(const RPN& other) : stack(other.stack) {}
+RPN::RPN(const RPN& copy) : stack(copy.stack) {}
 
-RPN& RPN::operator=(const RPN& other) {
-    if (this != &other) {
-        stack = other.stack;
+RPN& RPN::operator=(const RPN& copy) {
+    if (this != &copy) {
+        stack = copy.stack;
     }
     return *this;
 }

@@ -21,7 +21,7 @@ void processInput(const std::string& input, Container& result, double& time, int
     clock_t start = clock();
     sorter.sort(vec,steps);
     clock_t end = clock();
-    time = static_cast<double>(end - start) * 100 / CLOCKS_PER_SEC;
+    time = static_cast<double>(end - start) * 1000 / CLOCKS_PER_SEC;
     result = vec;
     res_steps = steps;
 }
@@ -31,14 +31,12 @@ int main(int argc, char* argv[]) {
         std::cerr << "Error" << std::endl;
         return 1;
     }
-
     std::ostringstream oss;
     for (int i = 1; i < argc; ++i) {
         if (i > 1) oss << " ";
         oss << argv[i];
     }
     std::string input = oss.str();
-
     std::cout << "Before: " << input << std::endl;
 
     try {
@@ -49,19 +47,29 @@ int main(int argc, char* argv[]) {
         int deqSteps = 0;
         processInput(input, vecResult, vecTime,vecSteps);
         processInput(input, deqResult, deqTime,deqSteps);
-
+        for (size_t i = 0; i < vecResult.size(); ++i) {
+            for(size_t j = i; j < vecResult.size(); j++) {
+                if(j != i) { 
+                    if(vecResult[i] == vecResult[j])
+                    {
+                        std::cerr << "no duplicates" << std::endl;
+                        return 1;
+                    }
+                }
+            }
+        }
         std::cout << "After: ";
+
         for (size_t i = 0; i < vecResult.size(); ++i) {
             std::cout << vecResult[i];
-            if (i < vecResult.size() - 1) std::cout << " ";
+            if (i < vecResult.size() - 1)
+                std::cout << " ";
         }
         std::cout << std::endl;
         std::cout << "time to process a range of " << vecResult.size() << " elements with std::vector : " << vecTime << " ms" << std::endl;
-        std::cout << "comparison steps used with std::vector: " << vecSteps << std::endl;
         std::cout << "time to process a range of " << deqResult.size() << " elements with std::deque : " << deqTime << " ms" << std::endl;
-        std::cout << "comparison steps used with std::deque: " << deqSteps << std::endl;
-    } catch (const std::exception&) {
-        std::cerr << "error" << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
         return 1;
     }
 

@@ -10,8 +10,8 @@ class RPN {
 public:
     RPN();
     ~RPN();
-    RPN(const RPN& other);
-    RPN& operator=(const RPN& other);
+    RPN(const RPN& copy);
+    RPN& operator=(const RPN& copy);
 
     int calculate(const std::string& expression);
 
